@@ -144,6 +144,11 @@
       return '<figure class="case-gallery-item" tabindex="0" role="button" data-gallery-index="' + index + '" aria-label="Посмотреть изображение: ' + escapeHtml(item.caption) + '">' +
         imageMarkup(item) + '<figcaption>' + escapeHtml(item.caption) + '</figcaption></figure>';
     }).join("");
+    var copyParagraphs = [project.intro, project.description].filter(function (copy) { return Boolean(copy); });
+    var caseDescription = copyParagraphs.length ? (
+      '<div class="case-description' + (copyParagraphs.length === 1 ? ' case-description--single' : '') + '">' +
+      copyParagraphs.map(function (copy) { return '<p>' + escapeHtml(copy) + '</p>'; }).join("") + '</div>'
+    ) : "";
     var demo = project.demo ? (
       '<section class="demo-block" aria-labelledby="demoTitle"><div class="demo-block__heading"><div><h3 id="demoTitle">Попробовать прототип</h3>' +
       '<p>Демо работает в пропорциях экрана iPhone 15 Pro Max. Страница загружается по кнопке и сохраняет собственные стили и сценарии.</p></div></div>' +
@@ -152,10 +157,10 @@
       '<span class="iphone-island" aria-hidden="true"></span><iframe class="demo-frame" title="Интерактивный макет сайта школы" loading="lazy" sandbox="allow-scripts allow-forms" src="about:blank"></iframe>' +
       '</div></div><figcaption>iPhone 15 Pro Max <span>· 430 px</span></figcaption></figure>' +
       '<div class="demo-copy"><strong>Попробуй сам</strong><p>Открой меню, перейди в разделы и прокручивай экран внутри телефона. Макет масштабируется под ширину устройства.</p>' +
-      '<a class="demo-external" href="' + escapeHtml(project.demo) + '" target="_blank" rel="noreferrer">Открыть макет в отдельной вкладке ↗</a></div></div></section>'
+      '<a class="demo-external" href="' + escapeHtml(project.demoPreview || project.demo) + '" target="_blank" rel="noreferrer">Открыть предпросмотр iPhone в новой вкладке</a></div></div></section>'
     ) : "";
     var context = project.context ? (
-      '<aside class="server-context" aria-label="Контекст сервера СП5"><div class="server-context__index"><span class="server-context__index-label">КОНТЕКСТ<br>СООБЩЕСТВА</span><a class="server-context__logo" href="https://www.youtube.com/watch?v=JTcy5k1RwRQ" target="_blank" rel="noreferrer" aria-label="Открыть официальный трейлер СП5 — источник логотипа"><span class="sr-only">Логотип СП5 из официального трейлера</span></a></div><div><p class="server-context__label">' + escapeHtml(project.context.label) +
+      '<aside class="server-context" aria-label="Контекст сервера СП5"><div class="server-context__index"><span class="server-context__index-label">КОНТЕКСТ<br>СООБЩЕСТВА</span><a class="server-context__logo" href="https://spworlds.ru/" target="_blank" rel="noreferrer" aria-label="Открыть официальный сайт СП"><img src="assets/work/sp-logo-user-reference.png" alt="Логотип СП: белый графический знак с синим акцентом и буквами СП" loading="lazy" decoding="async"></a></div><div><p class="server-context__label">' + escapeHtml(project.context.label) +
       '</p><h3>' + escapeHtml(project.context.title) + '</h3><p class="server-context__copy">' + escapeHtml(project.context.description) + '</p>' +
       '<div class="server-context__sources">' + project.context.sources.map(function (source) {
         return '<a href="' + escapeHtml(source.href) + '" target="_blank" rel="noreferrer">' + escapeHtml(source.label) + ' ↗</a>';
@@ -173,7 +178,7 @@
     projectDialogContent.innerHTML =
       '<section class="case-heading"><div><p class="case-heading__tag">' + escapeHtml(project.category) + '</p><h2 id="projectDialogTitle">' + escapeHtml(project.title) + '</h2><p class="case-heading__subtitle">' + escapeHtml(project.subtitle) + '</p></div>' +
       '<div class="case-facts">' + (project.facts || []).map(function (fact) { return '<span>' + escapeHtml(fact) + '</span>'; }).join("") + '</div></section>' +
-      '<div class="case-description"><p>' + escapeHtml(project.intro) + '</p><p>' + escapeHtml(project.description) + '</p></div>' +
+      caseDescription +
       context + (project.note ? '<p class="case-note">' + escapeHtml(project.note) + '</p>' : "") +
       demo + presentationResource + galleryBlock;
 
@@ -283,6 +288,35 @@
       menuButton.setAttribute("aria-expanded", "false");
     });
   });
+
+  var discordButton = document.getElementById("copyDiscord");
+  var contactCopyStatus = document.getElementById("contactCopyStatus");
+  function fallbackCopyText(value) {
+    var field = document.createElement("textarea");
+    field.value = value;
+    field.setAttribute("readonly", "");
+    field.style.position = "fixed";
+    field.style.opacity = "0";
+    document.body.appendChild(field);
+    field.select();
+    var copied = false;
+    try { copied = document.execCommand("copy"); } catch (error) { copied = false; }
+    field.remove();
+    return copied;
+  }
+  function reportDiscordCopy(copied) {
+    contactCopyStatus.textContent = copied ? "Ник Discord скопирован: show3nnn" : "Не удалось скопировать ник. Discord: show3nnn";
+  }
+  if (discordButton) {
+    discordButton.addEventListener("click", function () {
+      var value = discordButton.getAttribute("data-copy-value");
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(value).then(function () { reportDiscordCopy(true); }, function () { reportDiscordCopy(fallbackCopyText(value)); });
+      } else {
+        reportDiscordCopy(fallbackCopyText(value));
+      }
+    });
+  }
 
   function observeReveals() {
     var elements = document.querySelectorAll(".reveal:not(.is-observed)");

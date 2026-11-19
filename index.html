@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#f1f2ed">
   <meta name="description" content="Портфолио Глеба — постеры, логотипы, визуальные эксперименты и интерактивные интерфейсы.">
   <title>Глеб — графический дизайн и визуальные эксперименты</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
   <script defer src="projects.js"></script>
   <script defer src="app.js"></script>
@@ -23,7 +24,6 @@
     <nav class="main-nav" id="main-nav" aria-label="Основная навигация">
       <a href="#projects">Проекты</a>
       <a href="#archive">Все работы</a>
-      <a href="#about">Обо мне</a>
       <a class="nav-contact" href="#contact">Контакт</a>
     </nav>
     <span class="header-note">Портфолио · 2026</span>
@@ -87,36 +87,24 @@
       </div>
     </section>
 
-    <section class="about-section section-wrap" id="about">
-      <div class="about-photo-wrap reveal">
-        <div class="about-photo-back"></div>
-        <figure class="about-photo">
-          <img src="assets/work/32.png" alt="Геометрический знак MUSE из личных визуальных поисков" loading="lazy" decoding="async">
-          <figcaption><span>ГЛЕБ</span></figcaption>
-        </figure>
-        <span class="about-seal">3+<small>ЛЕТ<br>в дизайне</small></span>
-        <span class="about-note">не фото для резюме,<br>а я — как есть</span>
-      </div>
-      <div class="about-copy reveal">
-        <p class="eyebrow">Обо мне · 18 лет</p>
-        <h2>Дизайн —<br><em>это поиск.</em></h2>
-        <p class="about-lede">Больше трёх лет создаю постеры, логотипы и визуальные эксперименты. Сейчас пробую новые направления, изучаю веб-дизайн и интерфейсы.</p>
-        <p>Дизайн начался как увлечение и постепенно становится всё более важной частью моей жизни. Я открыт к интересным проектам: новая задача — это практика, опыт и повод посмотреть на привычное по-другому.</p>
-        <div class="about-tags"><span>Постеры</span><span>Логотипы</span><span>Интерфейсы</span><span>Эксперименты</span></div>
-        <p class="experience-note">В основе портфолио — личные, учебные и некоммерческие работы.</p>
-      </div>
-    </section>
-
     <section class="contact-section" id="contact">
       <div class="contact-inner section-wrap reveal">
         <div class="contact-kicker"><span class="contact-star">✳</span><p>Открыт к новым проектам</p></div>
         <h2>Есть идея?<br><em>Давай придадим ей форму.</em></h2>
         <div class="contact-bottom">
           <p>Напиши мне — обсудим задачу, визуальный язык и с чего начать.</p>
-          <a class="contact-link" href="https://t.me/show3nnn" target="_blank" rel="noreferrer">
-            <span>Telegram</span><span class="contact-link__mark" aria-hidden="true">✳</span>
-          </a>
+          <div class="contact-methods" aria-label="Способы связи">
+            <a class="contact-link" href="https://t.me/show3nnn" target="_blank" rel="noreferrer">
+              <span class="contact-link__identity"><span class="contact-link__platform">Telegram</span><span class="contact-link__value">@show3nnn</span></span>
+              <span class="contact-link__mark" aria-hidden="true">✳</span>
+            </a>
+            <button class="contact-link discord-copy" id="copyDiscord" type="button" data-copy-value="show3nnn" aria-label="Скопировать ник Discord show3nnn">
+              <span class="contact-link__identity"><span class="contact-link__platform">Discord</span><span class="contact-link__value">show3nnn</span></span>
+              <svg class="contact-link__discord" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+            </button>
+          </div>
         </div>
+        <p class="contact-copy-status" id="contactCopyStatus" aria-live="polite"></p>
       </div>
     </section>
   </main>

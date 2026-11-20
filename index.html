@@ -43,7 +43,10 @@
       <div class="hero__visual reveal">
         <div class="hero-stamp"><b>3+</b><span>ЛЕТ<br>в дизайне</span></div>
         <div class="hero-art">
-          <img src="assets/about/avatar.jpg" alt="Глеб, автор портфолио" fetchpriority="high">
+          <div class="hero-carousel" id="heroCarousel" role="group" aria-roledescription="карусель" aria-label="Фотографии Глеба">
+            <img class="hero-carousel__image" src="assets/about/avatar.jpg" alt="Портрет Глеба в чёрно-белом исполнении" fetchpriority="high">
+            <span class="hero-carousel__count" aria-hidden="true">01 / 07</span>
+          </div>
           <span class="hero-art__corner">ГЛЕБ · ВИЗУАЛЬНАЯ ПРАКТИКА</span>
         </div>
         <span class="hero-spark hero-spark--one" aria-hidden="true">✳</span>
@@ -96,7 +99,7 @@
           <div class="contact-methods" aria-label="Способы связи">
             <a class="contact-link" href="https://t.me/show3nnn" target="_blank" rel="noreferrer">
               <span class="contact-link__identity"><span class="contact-link__platform">Telegram</span><span class="contact-link__value">@show3nnn</span></span>
-              <span class="contact-link__mark" aria-hidden="true">✳</span>
+              <svg class="contact-link__telegram" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21.94 4.62 18.83 19.3c-.24 1.07-.87 1.34-1.77.84l-4.9-3.61-2.36 2.27c-.26.26-.48.48-.98.48l.35-4.98 9.06-8.19c.39-.35-.09-.55-.6-.2L6.44 12.84 1.6 11.33c-1.05-.33-1.07-1.05.22-1.56L20.8 2.53c.87-.32 1.63.21 1.35 2.09z"/></svg>
             </a>
             <button class="contact-link discord-copy" id="copyDiscord" type="button" data-copy-value="show3nnn" aria-label="Скопировать ник Discord show3nnn">
               <span class="contact-link__identity"><span class="contact-link__platform">Discord</span><span class="contact-link__value">show3nnn</span></span>

@@ -104,7 +104,17 @@ button, a { -webkit-tap-highlight-color: transparent; }
   transition: transform .4s cubic-bezier(.2,.8,.2,1);
 }
 .hero-art:hover { transform: rotate(0deg) translateY(-5px); }
-.hero-art img { width: 100%; aspect-ratio: 1 / 1.08; object-fit: contain; background: #fff; }
+.hero-art img { width: 100%; aspect-ratio: 1 / 1.08; object-fit: cover; object-position: center 30%; background: #fff; }
+.hero-carousel { position: relative; overflow: hidden; }
+.hero-carousel__image { display: block; transition: opacity .24s ease; }
+.hero-carousel__image.is-changing { opacity: .72; }
+.hero-carousel__count {
+  position: absolute; right: 12px; bottom: 12px; min-width: 48px; padding: 9px 12px;
+  border: 1px solid rgba(255,255,255,.2); border-radius: 999px; color: var(--white);
+  background: rgba(25,26,24,.84); backdrop-filter: blur(8px);
+  font-size: 10px; font-weight: 750; letter-spacing: .08em; text-align: center;
+}
+@media (prefers-reduced-motion: reduce) { .hero-carousel__image { transition: none; } }
 .hero-art__corner {
   position: absolute; bottom: -35px; left: 15px; font-size: 10px; font-weight: 750;
   letter-spacing: .12em; text-transform: uppercase;
@@ -225,7 +235,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .contact-link__identity { display: grid; gap: 5px; min-width: 0; }
 .contact-link__platform { font-size: 11px; font-weight: 820; }
 .contact-link__value { color: #454741; font-size: 12px; font-weight: 580; }
-.contact-link__mark { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid currentColor; border-radius: 50%; font-size: 14px; }
+.contact-link__telegram { flex: 0 0 28px; width: 28px; height: 28px; fill: currentColor; }
 .contact-link__discord { flex: 0 0 28px; width: 28px; height: 28px; fill: currentColor; }
 .contact-copy-status { width: min(100%,490px); min-height: 16px; margin: 12px 0 0 auto; color: var(--lime); font-size: 11px; }
 .site-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 24px; }
@@ -307,7 +317,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   overscroll-behavior: contain; touch-action: pan-x pan-y;
 }
 .iphone-island {
-  position: absolute; z-index: 3; top: 10px; left: 50%; width: 108px; height: 29px; transform: translateX(-50%);
+  position: absolute; z-index: 3; top: 8px; left: 50%; width: 62px; height: 17px; transform: translateX(-50%);
   border: 1px solid rgba(255,255,255,.08); border-radius: 999px; background: #050506; pointer-events: none;
 }
 .iphone-device figcaption { color: #d7d8d3; font-size: 11px; font-weight: 750; letter-spacing: .04em; text-align: center; }

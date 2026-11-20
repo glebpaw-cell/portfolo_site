@@ -76,6 +76,56 @@
       '" loading="' + (loading || "lazy") + '" decoding="async">';
   }
 
+  function initializeHeroCarousel() {
+    var carousel = document.getElementById("heroCarousel");
+    if (!carousel) return;
+
+    var image = carousel.querySelector(".hero-carousel__image");
+    var counter = carousel.querySelector(".hero-carousel__count");
+    var slides = [
+      { src: "assets/about/avatar.jpg", alt: "Портрет Глеба в чёрно-белом исполнении" },
+      { src: "assets/about/portraits/portrait-02.jpg", alt: "Глеб в фиолетовой футболке на скамье" },
+      { src: "assets/about/portraits/portrait-03.jpg", alt: "Портрет Глеба в тёмных очках" },
+      { src: "assets/about/portraits/portrait-04.jpg", alt: "Глеб читает книгу среди зелени" },
+      { src: "assets/about/portraits/portrait-05.jpg", alt: "Глеб на фоне красочной весенней декорации" },
+      { src: "assets/about/portraits/portrait-06.jpg", alt: "Крупный портрет Глеба в тёмной толстовке" },
+      { src: "assets/about/portraits/portrait-07.jpg", alt: "Глеб отдыхает с цветочным венком" }
+    ];
+    var activeIndex = 0;
+    var timer = 0;
+
+    function showSlide(index) {
+      activeIndex = (index + slides.length) % slides.length;
+      var slide = slides[activeIndex];
+      image.classList.add("is-changing");
+      image.src = slide.src;
+      image.alt = slide.alt;
+      counter.textContent = String(activeIndex + 1).padStart(2, "0") + " / " + String(slides.length).padStart(2, "0");
+      window.requestAnimationFrame(function () { image.classList.remove("is-changing"); });
+    }
+
+    function start() {
+      if (!timer && !document.hidden) {
+        timer = window.setInterval(function () { showSlide(activeIndex + 1); }, 5000);
+      }
+    }
+
+    function stop() {
+      window.clearInterval(timer);
+      timer = 0;
+    }
+
+    slides.slice(1).forEach(function (slide) {
+      var preload = new Image();
+      preload.src = slide.src;
+    });
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stop();
+      else start();
+    });
+    start();
+  }
+
   function renderProjects() {
     projectGrid.innerHTML = projects.filter(function (project) { return project.featured; }).map(function (project, index) {
       return '<article class="project-card reveal" data-project="' + escapeHtml(project.id) + '" tabindex="0" role="button" aria-label="Открыть кейс: ' + escapeHtml(project.title) + '" style="--card-tone:' + escapeHtml(project.tone) + '">' +
@@ -122,7 +172,7 @@
   }
 
   function renderFilters() {
-    var filters = ["Все", "Айдентика", "Постеры", "Соцсети", "Баннеры", "Интерфейсы", "Презентации", "Карточки товара"];
+    var filters = ["Все", "Айдентика", "Постеры и баннеры", "Соцсети", "Интерфейсы", "Презентации", "Карточки товара"];
     filtersElement.innerHTML = filters.map(function (filter) {
       return '<button class="filter-button" type="button" data-filter="' + escapeHtml(filter) + '" aria-pressed="' + (filter === currentFilter ? "true" : "false") + '">' + escapeHtml(filter) + '</button>';
     }).join("");
@@ -388,6 +438,7 @@
   window.addEventListener("scroll", updateProgress, { passive: true });
 
   initializeTicker();
+  initializeHeroCarousel();
   renderProjects();
   renderFilters();
   filterItems("Все");

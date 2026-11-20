@@ -160,7 +160,7 @@
       '<a class="demo-external" href="' + escapeHtml(project.demoPreview || project.demo) + '" target="_blank" rel="noreferrer">Открыть предпросмотр iPhone в новой вкладке</a></div></div></section>'
     ) : "";
     var context = project.context ? (
-      '<aside class="server-context" aria-label="Контекст сервера СП5"><div class="server-context__index"><span class="server-context__index-label">КОНТЕКСТ<br>СООБЩЕСТВА</span><a class="server-context__logo" href="https://spworlds.ru/" target="_blank" rel="noreferrer" aria-label="Открыть официальный сайт СП"><img src="assets/work/sp-logo-user-reference.png" alt="Логотип СП: белый графический знак с синим акцентом и буквами СП" loading="lazy" decoding="async"></a></div><div><p class="server-context__label">' + escapeHtml(project.context.label) +
+      '<aside class="server-context" aria-label="Контекст сервера СП5"><div class="server-context__index"><span class="server-context__index-label">КОНТЕКСТ<br>СООБЩЕСТВА</span><a class="server-context__logo" href="https://spworlds.ru/" target="_blank" rel="noreferrer" aria-label="Открыть сайт СП5"><img src="assets/work/sp-logo-user-reference.png" alt="Круглый фиолетовый логотип СП5 с градиентом и геометрическим знаком" loading="lazy" decoding="async"></a></div><div><p class="server-context__label">' + escapeHtml(project.context.label) +
       '</p><h3>' + escapeHtml(project.context.title) + '</h3><p class="server-context__copy">' + escapeHtml(project.context.description) + '</p>' +
       '<div class="server-context__sources">' + project.context.sources.map(function (source) {
         return '<a href="' + escapeHtml(source.href) + '" target="_blank" rel="noreferrer">' + escapeHtml(source.label) + ' ↗</a>';
